@@ -1,12 +1,18 @@
 let currentDirection = "en|sv";
+let isEnabled = true;
 
-chrome.storage.local.get("direction", ({ direction }) => {
+chrome.storage.local.get(["direction", "enabled"], ({ direction, enabled }) => {
   currentDirection = direction || "en|sv";
+  if (enabled !== undefined) isEnabled = enabled;
 });
 
 chrome.storage.onChanged.addListener((changes) => {
   if (changes.direction) {
     currentDirection = changes.direction.newValue;
+  }
+  if (changes.enabled) {
+    isEnabled = changes.enabled.newValue;
+    if (!isEnabled) hideTooltip();
   }
 });
 
@@ -110,6 +116,7 @@ if (isGoogleDocs) {
 }
 
 async function handleClipboardText(text) {
+  if (!isEnabled) return;
   if (text.length > 500) {
     const rect = mouseRect();
     showTooltip(rect, `<div class="ensv-dir">${dirLabels[currentDirection]}</div>Selection too long (max 500 chars)`);
@@ -137,6 +144,7 @@ function mouseRect() {
 }
 
 async function handleSelection() {
+  if (!isEnabled) return;
   const sel = window.getSelection();
   const text = sel.toString().trim();
   if (!text) return;
