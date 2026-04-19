@@ -30,7 +30,12 @@ body {
   padding: 10px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.direction:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .switch {
@@ -80,19 +85,3 @@ body {
   font-weight: 600;
 }
 
-.toggle-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background: #fecc02;
-  color: #003366;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.toggle-btn:hover {
-  background: #ffd633;
-}

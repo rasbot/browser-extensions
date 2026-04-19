@@ -1,5 +1,4 @@
 const label = document.getElementById("direction-label");
-const btn = document.getElementById("toggle-btn");
 const enabledToggle = document.getElementById("enabled-toggle");
 const enabledLabel = document.getElementById("enabled-label");
 
@@ -42,7 +41,7 @@ enabledToggle.addEventListener("change", () => {
   });
 });
 
-btn.addEventListener("click", () => {
+label.addEventListener("click", () => {
   chrome.storage.local.get("direction", ({ direction }) => {
     const next = direction === "en|sv" ? "sv|en" : "en|sv";
     currentDir = next;
